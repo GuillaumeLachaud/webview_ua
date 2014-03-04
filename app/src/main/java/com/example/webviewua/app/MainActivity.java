@@ -2,24 +2,38 @@ package com.example.webviewua.app;
 
 import android.content.Context;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebView;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
+
+
+    private EditText mAddressEditText;
+    private WebView mWebView;
+    private CheckBox mSetAsDefaultCheckbox;
+
+    private final static String DEFAULT_URL_PREF_KEY = "com.example.webviewua.app.DEFAULT_URL_PREF_KEY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        WebView view = (WebView) findViewById(R.id.webView);
-        String ua = view.getSettings().getUserAgentString() ;
+        mWebView = (WebView) findViewById(R.id.webView);
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        String ua = mWebView.getSettings().getUserAgentString() ;
         ((TextView) findViewById(R.id.userAgentTextView)).setText(ua);
+        mAddressEditText = (EditText) findViewById(R.id.addressEditText);
+        mSetAsDefaultCheckbox = (CheckBox) findViewById(R.id.defaultCheckbox);
 
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             android.text.ClipboardManager clipboard = (android.text.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
@@ -31,6 +45,12 @@ public class MainActivity extends ActionBarActivity {
         }
 
         Toast.makeText(this, getString(R.string.copiedToClipboard), Toast.LENGTH_LONG).show();
+
+        String defaultUrl = PreferenceManager.getDefaultSharedPreferences(this).getString(DEFAULT_URL_PREF_KEY, null);
+        if(defaultUrl != null){
+            mAddressEditText.setText(defaultUrl);
+            onGoClicked(null);
+        }
     }
 
 
@@ -52,6 +72,14 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onGoClicked(View v){
+        String url = mAddressEditText.getText().toString();
+        mWebView.loadUrl(url);
+        if(mSetAsDefaultCheckbox.isChecked()){
+            PreferenceManager.getDefaultSharedPreferences(this).edit().putString(DEFAULT_URL_PREF_KEY, url).commit();
+        }
     }
 
 }

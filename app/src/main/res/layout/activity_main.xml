@@ -13,8 +13,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <EditText
+        android:id="@+id/addressEditText"
+        android:layout_width="fill_parent"
+        android:layout_below="@+id/userAgentTextView"
+        android:text="@string/addressPrefix"
+        android:singleLine="true"
+        android:layout_marginTop="10dip"
+        android:layout_toLeftOf="@+id/goButton"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/goButton"
+        android:onClick="onGoClicked"
+        android:layout_toLeftOf="@+id/defaultCheckbox"
+        android:layout_alignBottom="@+id/addressEditText"
+        android:text="@string/go"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:id="@+id/defaultCheckbox"
+        android:layout_alignBottom="@+id/addressEditText"
+        android:layout_alignParentRight="true"
+        android:checked="true"/>
+
     <WebView
         android:id="@+id/webView"
+        android:layout_below="@+id/addressEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

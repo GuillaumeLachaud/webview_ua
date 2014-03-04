@@ -4,5 +4,8 @@
     <string name="app_name">WebView UA</string>
     <string name="copiedToClipboard">UA copied to clipboard</string>
     <string name="action_settings">Settings</string>
+    <string name="go">Go</string>
+    <string name="addressPrefix">http://</string>
+    <string name="save">Save</string>
 
 </resources>
