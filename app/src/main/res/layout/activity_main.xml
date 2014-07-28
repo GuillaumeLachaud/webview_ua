@@ -45,6 +45,6 @@
         android:id="@+id/webView"
         android:layout_below="@+id/addressEditText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="fill_parent" />
 
 </RelativeLayout>

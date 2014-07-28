@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,6 +31,14 @@ public class MainActivity extends ActionBarActivity {
 
         mWebView = (WebView) findViewById(R.id.webView);
         mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.setWebViewClient(new WebViewClient(){
+
+            public boolean shouldOverrideUrlLoading(WebView view, String url){
+                view.loadUrl(url);
+                return false; 
+            }
+
+        });
         String ua = mWebView.getSettings().getUserAgentString() ;
         ((TextView) findViewById(R.id.userAgentTextView)).setText(ua);
         mAddressEditText = (EditText) findViewById(R.id.addressEditText);

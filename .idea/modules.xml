@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/WebViewUA.iml" filepath="$PROJECT_DIR$/WebViewUA.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webview_ua.iml" filepath="$PROJECT_DIR$/webview_ua.iml" />
     </modules>
   </component>
 </project>
